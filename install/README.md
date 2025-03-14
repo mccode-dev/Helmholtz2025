@@ -4,7 +4,7 @@
 ```bash 
 "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
 ```
-(and please do configure for conda-forge) and start the environment - set up init as you wish, but do activate the base / created environment)
+(Please do configure for conda-forge and start the environment - set up init as you wish, but do activate the base / created environment)
 
 ## Install build-dependencies for McStas/McXtrace:
 ```bash 
