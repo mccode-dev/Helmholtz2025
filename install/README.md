@@ -18,7 +18,7 @@ micromamba install bash pyaml numpy mcpl ncrystal xraylib cif2hkl gsl libnexus o
 
 ## Install runtime-dependencies for McStas/McXtrace (visualisation+gui+bells+whistles)
 ```bash 
-micromamba install pyqt>=5.10 qscintilla2 matplolib-base tornado>=5 scipy pillow pyqtgraph qtpy nodejs ply rsync jinja2 mcstasscript jupytext jupyterlab nexpy
+micromamba install pyqt>=5.10 qscintilla2 matplotlib-base tornado>=5 scipy pillow pyqtgraph qtpy nodejs ply rsync jinja2 mcstasscript jupytext jupyterlab nexpy
 ```
 
 ## (shallow) Clone the McCode repo hackathon branch:
