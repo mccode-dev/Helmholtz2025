@@ -106,3 +106,9 @@ mctest --testdir /some/location --openacc -n1e7 --instr=PSI_DMC
 * Leaving out `--openacc` means targeting CPU
 * `--mpi=N` parallelizes by mpi
 * `mcviewtest` can be used to render a HTML result table [example](https://new-nightly.mcstas.org/2025-03-14_output.html) 
+
+## Configure for "Multicore" OpenACC:
+```bash
+mcrun --write-user-config
+```
+and hack your `.mcstas/3.99.999/mccode_config.json` replacing `-acc=gpu -gpu=mem:managed` by `-acc=multicore`
