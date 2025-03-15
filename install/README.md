@@ -89,7 +89,7 @@ module load nvhpc
 
 ## Compile and run a McStas instrument on GPU (use `mxrun` and `$MCXTRACE for McXtrace`)
 ```bash
-export MCSTAS=$CONDA_PREFIX/share/mcstas 
+export MCSTAS=$CONDA_PREFIX/share/mcstas/resources
 cp $MCSTAS/examples/Templates/mini/mini.instr .
 mcrun -c mini.instr --openacc dummy=0 -n1e7
 ```
