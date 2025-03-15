@@ -88,7 +88,8 @@ module load nvhpc
 (If for your own machine, download from https://developer.nvidia.com/hpc-sdk-downloads) 
 
 ## Compile and run a McStas instrument on GPU (use `mxrun` and `$MCXTRACE for McXtrace`)
-```bash 
+```bash
+export MCSTAS=$CONDA_PREFIX/share/mcstas 
 cp $MCSTAS/examples/Templates/mini/mini.instr .
 mcrun -c mini.instr --openacc dummy=0 -n1e7
 ```
