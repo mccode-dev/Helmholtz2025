@@ -1,4 +1,4 @@
-# Set up dev environment based on conda-forge
+# Set up dev environment based on micromamba and conda-forge
 
 ## Install a fresh micromamba environment:
 ### Unixes:
