@@ -1,4 +1,4 @@
-# OS assumption: Linux (x86_64 or arm64)
+# Set up dev environment based on conda-forge
 
 ## Install a fresh micromamba environment:
 ```bash 
@@ -15,6 +15,7 @@ micromamba install git compilers cmake make flex bison
 ```bash 
 micromamba install bash pyaml numpy mcpl ncrystal xraylib cif2hkl gsl libnexus openmpi=4 ucx
 ```
+(if on macOS out `ucx`, if on Windows leave out `openmpi=4 ucx` and add `msmpi`)
 
 ## Install runtime-dependencies for McStas/McXtrace (visualisation+gui+bells+whistles)
 ```bash 
@@ -27,7 +28,7 @@ git clone --depth 1 https://github.com/mccode-dev/McCode.git -b Helmholtz-hackat
 ```
 
 ## Build McStas:
-```bash 
+```bash https://github.com/mccode-dev/Helmholtz2025/tree/main/install
 cd McCode
 mkdir build && cd build
 cmake \
@@ -80,12 +81,20 @@ cmake --build . --config Release
 cmake --build . --target install --config Release
 ```
 
+# Running with --openacc, OS assumption: Linux (x86_64 or arm64)
+
 ## Activate nvhpc
 Likely just a matter of
 ```bash 
 module load nvhpc
 ``` 
 (If for your own machine, download from https://developer.nvidia.com/hpc-sdk-downloads) 
+
+## Configure for "Multicore" OpenACC:
+```bash
+mcrun --write-user-config
+```
+and hack your `.mcstas/3.99.999/mccode_config.json` replacing `-acc=gpu -gpu=mem:managed` by `-acc=multicore`
 
 ## Compile and run a McStas instrument on GPU (use `mxrun` and `$MCXTRACE for McXtrace`)
 ```bash
@@ -108,8 +117,3 @@ mctest --testdir $PWD --openacc -n1e7 --instr=PSI_DMC
 * `--mpi=N` parallelizes by mpi
 * `mcviewtest` can be used to render a HTML result table [example](https://new-nightly.mcstas.org/2025-03-14_output.html) 
 
-## Configure for "Multicore" OpenACC:
-```bash
-mcrun --write-user-config
-```
-and hack your `.mcstas/3.99.999/mccode_config.json` replacing `-acc=gpu -gpu=mem:managed` by `-acc=multicore`
