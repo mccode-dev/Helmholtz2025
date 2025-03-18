@@ -1,8 +1,13 @@
 # Set up dev environment based on conda-forge
 
 ## Install a fresh micromamba environment:
+### Unixes:
 ```bash 
 "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
+```
+### Windows:
+```PowerShell 
+Invoke-Expression ((Invoke-WebRequest -Uri https://micro.mamba.pm/install.ps1 -UseBasicParsing).Content)
 ```
 (Please do configure for conda-forge and start the environment - set up init as you wish, but do activate the base / created environment)
 
