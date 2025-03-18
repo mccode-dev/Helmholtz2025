@@ -101,7 +101,7 @@ mcrun -c mini.instr --openacc dummy=0 -n1e7
 
 ## Run a GPU test for a named McStas instrument (use `mxtest` for McXtrace)
 ```bash 
-mctest --testdir /some/location --openacc -n1e7 --instr=PSI_DMC
+mctest --testdir $PWD --openacc -n1e7 --instr=PSI_DMC
 ```
 * Leaving out the `--instr` filter runs the "full suite"
 * Leaving out `--openacc` means targeting CPU
