@@ -81,7 +81,8 @@ cmake --build . --config Release
 cmake --build . --target install --config Release
 ```
 
-# Running with --openacc, OS assumption: Linux (x86_64 or arm64)
+# Running with --openacc, 
+## OS requirement: Linux (x86_64 or arm64)
 
 ## Activate nvhpc
 Likely just a matter of
