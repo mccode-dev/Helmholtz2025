@@ -81,7 +81,7 @@ cmake --build . --config Release
 cmake --build . --target install --config Release
 ```
 
-# Running with --openacc, 
+# Running on a GPU machine with --openacc, 
 ## OS requirement: Linux (x86_64 or arm64)
 
 ## Activate nvhpc
