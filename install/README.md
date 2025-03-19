@@ -1,4 +1,4 @@
-# Set up dev environment based on micromamba and conda-forge
+# A) Set up dev environment based on micromamba and conda-forge
 
 ## Install a fresh micromamba environment:
 ### Unixes:
@@ -35,6 +35,7 @@ micromamba install bash pyaml numpy ncrystal xraylib cif2hkl gsl libnexus msmpi
 micromamba install python=3.12 pyqt\>=5.10 qscintilla2 matplotlib-base tornado\>=5 scipy pillow pyqtgraph qtpy nodejs ply rsync jinja2 mcstasscript jupytext jupyterlab nexpy
 ```
 
+# B) Build McStas / McXtrace
 ## (shallow) Clone the McCode repo hackathon branch:
 ```bash 
 git clone --depth 1 https://github.com/mccode-dev/McCode.git -b Helmholtz-hackathon-2025
@@ -131,3 +132,6 @@ mctest --testdir $PWD --openacc -n1e7 --instr=PSI_DMC
 * `--mpi=N` parallelizes by mpi
 * `mcviewtest` can be used to render a HTML result table [example](https://new-nightly.mcstas.org/2025-03-14_output.html) 
 
+## Using "Nsight Systens and Compute" 
+* Get [Nsight Systems](https://developer.nvidia.com/nsight-systems) for your local laptop
+* Get [Nsight Compute](https://developer.nvidia.com/nsight-compute) for your laptop
