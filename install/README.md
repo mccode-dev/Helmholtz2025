@@ -103,9 +103,8 @@ cmake --build . --target install --config Release
 ## Activate nvhpc
 Likely just a matter of
 ```bash 
-module load nvhpc
-``` 
-(If for your own machine, download from https://developer.nvidia.com/hpc-sdk-downloads) 
+module load NVHPC
+``` or similar. (If for your own machine, download from https://developer.nvidia.com/hpc-sdk-downloads) 
 
 ## Configure for "Multicore" OpenACC:
 ```bash
