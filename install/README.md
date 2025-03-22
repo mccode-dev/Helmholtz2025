@@ -5,6 +5,8 @@
 ```bash 
 "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
 ```
+Recommendation: install everything `~/micromamba/bin`
+
 ### Windows:
 ```PowerShell 
 Invoke-Expression ((Invoke-WebRequest -Uri https://micro.mamba.pm/install.ps1 -UseBasicParsing).Content)
