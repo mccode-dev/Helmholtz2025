@@ -104,7 +104,8 @@ cmake --build . --target install --config Release
 Likely just a matter of
 ```bash 
 module load NVHPC
-``` or similar. (If for your own machine, download from https://developer.nvidia.com/hpc-sdk-downloads) 
+```
+or similar. (If for your own machine, download from https://developer.nvidia.com/hpc-sdk-downloads) 
 
 ## Configure for "Multicore" OpenACC:
 ```bash
