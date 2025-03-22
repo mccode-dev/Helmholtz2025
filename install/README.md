@@ -106,7 +106,7 @@ Likely just a matter of
 module load NVHPC
 ```
 or similar. (If for your own machine, download from https://developer.nvidia.com/hpc-sdk-downloads) 
-Prpofiling tools are availble via
+Profiling tools are availble via
 ```bash 
 module load Nsight-Compute
 module load Nsight-Systems
