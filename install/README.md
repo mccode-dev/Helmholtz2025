@@ -5,6 +5,8 @@
 ```bash 
 "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
 ```
+Recommendation: install everything `~/micromamba/bin`
+
 ### Windows:
 ```PowerShell 
 Invoke-Expression ((Invoke-WebRequest -Uri https://micro.mamba.pm/install.ps1 -UseBasicParsing).Content)
@@ -101,9 +103,14 @@ cmake --build . --target install --config Release
 ## Activate nvhpc
 Likely just a matter of
 ```bash 
-module load nvhpc
-``` 
-(If for your own machine, download from https://developer.nvidia.com/hpc-sdk-downloads) 
+module load NVHPC
+```
+or similar. (If for your own machine, download from https://developer.nvidia.com/hpc-sdk-downloads) 
+Profiling tools are availble via
+```bash 
+module load Nsight-Compute
+module load Nsight-Systems
+```
 
 ## Configure for "Multicore" OpenACC:
 ```bash
