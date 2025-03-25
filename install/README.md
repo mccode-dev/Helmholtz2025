@@ -3,9 +3,9 @@
 ## Install a fresh micromamba environment:
 ### Unixes:
 ```bash 
-"${SHELL}" -p"${PROJECT}/McStasMcXtrace/${USER}" -r"${PROJECT}/McStasMcXtrace/${USER}" <(curl -L micro.mamba.pm/install.sh)
+"${SHELL}" <(curl -L micro.mamba.pm/install.sh)
 ```
-Recommendation: install everything `~/micromamba/bin`
+Recommendation: install to `${PROJECT}/McStasMcXtrace/${USER}`
 
 ### Windows:
 ```PowerShell 
