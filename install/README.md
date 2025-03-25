@@ -5,7 +5,7 @@
 ```bash 
 "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
 ```
-Recommendation: install to `${PROJECT}/McStasMcXtrace/${USER}`
+Recommendation: install to `${PROJECT_training2508}/McStasMcXtrace/${USER}`
 
 ### Windows:
 ```PowerShell 
