@@ -1,6 +1,7 @@
-# A) Set up dev environment based on micromamba and conda-forge
+# A) Set up dev environment for compilation and execution on JEDI
+## Deployment based on micromamba and conda-forge
 
-## Install a fresh micromamba environment on Jedi
+## Install a fresh micromamba environment:
 ### 
 Recommendation: install to `${PROJECT_training2508}/McStasMcXtrace/${USER}` - echo and keep on pasteboard
 ```bash 
@@ -14,17 +15,8 @@ micromamba install git compilers cmake make flex bison
 ```
 
 ## Install runtime-dependencies for McStas/McXtrace (mcrun + basic calculations only)
-### Linux
 ```bash 
 micromamba install bash pyaml numpy mcpl ncrystal xraylib cif2hkl gsl libnexus openmpi=4 ucx
-```
-### macOS
-```bash 
-micromamba install bash pyaml numpy mcpl ncrystal xraylib cif2hkl gsl libnexus openmpi=4
-```
-### Windows 
-```PowerShell 
-micromamba install bash pyaml numpy ncrystal xraylib cif2hkl gsl libnexus msmpi
 ```
 
 ## Install runtime-dependencies for McStas/McXtrace (visualisation+gui+bells+whistles)
