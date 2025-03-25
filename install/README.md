@@ -1,7 +1,7 @@
 # Setup of environment for compilation and execution on JEDI
-## Deployment based on micromamba and conda-forge
+## 1. Deployment based on micromamba and conda-forge
 
-## Install a fresh micromamba environment:
+### Install a fresh micromamba environment:
 Recommendation: install to `echo ${PROJECT_training2508}/McStasMcXtrace/${USER}` -  and keep on pasteboard
 ```bash 
 "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
@@ -12,24 +12,24 @@ work in that.
 micromamba activate
 ```
 
-## Install build-dependencies for McStas/McXtrace:
+### Install build-dependencies for McStas/McXtrace:
 ```bash 
 micromamba install git compilers cmake make flex bison
 ```
 
-## Install runtime-dependencies for McStas/McXtrace (mcrun + basic calculations only)
+### Install runtime-dependencies for McStas/McXtrace (mcrun + basic calculations only)
 ```bash 
 micromamba install bash pyaml numpy mcpl ncrystal xraylib cif2hkl gsl libnexus openmpi=4 ucx
 ```
 
-## Install runtime-dependencies for McStas/McXtrace 
+### Install runtime-dependencies for McStas/McXtrace 
 ### (visualisation+gui+bells+whistles - requires downgrade to python 3.12...)
 ```bash 
 micromamba install python=3.12 pyqt\>=5.10 qscintilla2 matplotlib-base tornado\>=5 scipy pillow pyqtgraph qtpy nodejs ply rsync jinja2 mcstasscript jupytext jupyterlab nexpy
 ```
 
-# Build McStas / McXtrace
-## (shallow) Clone the McCode repo hackathon branch:
+## 2. Build McStas / McXtrace
+### (shallow) Clone the McCode repo hackathon branch:
 ```bash 
 git clone --depth 1 https://github.com/mccode-dev/McCode.git -b Helmholtz-hackathon-2025
 ```
@@ -89,25 +89,22 @@ cmake --build . --target install --config Release
 ```
 
 
-
-
-
-## NVIDIA tools
+## 3. NVIDIA tools
 ### NVHPC
-On JEDI matter of
+On JEDI a matter of
 ```bash 
 module load NVHPC
 ```
-### Profiling tools are availble via
+### Profiling tools are available via
 ```bash 
 module load Nsight-Compute
 module load Nsight-Systems
 ```
-## Using "Nsight Systens and Compute" 
+## 4. Using "Nsight Systens and Compute" on own laptop
 * Get [Nsight Systems](https://developer.nvidia.com/nsight-systems) for your local laptop
 * Get [Nsight Compute](https://developer.nvidia.com/nsight-compute) for your laptop
 
-### [Running simulations / tests](TESTS.md)
+# [Running simulations / tests](TESTS.md)
 
 
 
