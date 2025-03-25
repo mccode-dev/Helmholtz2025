@@ -1,13 +1,16 @@
-# A) Set up dev environment for compilation and execution on JEDI
+# Setup of environment for compilation and execution on JEDI
 ## Deployment based on micromamba and conda-forge
 
 ## Install a fresh micromamba environment:
-### 
-Recommendation: install to `${PROJECT_training2508}/McStasMcXtrace/${USER}` - echo and keep on pasteboard
+Recommendation: install to `echo ${PROJECT_training2508}/McStasMcXtrace/${USER}` -  and keep on pasteboard
 ```bash 
 "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
 ```
-Recommendation: activate the resulting enviroment `base` and simply install there:
+Recommendation: activate the resulting enviroment `base` and simply
+work in that.
+```bash 
+micromamba activate
+```
 
 ## Install build-dependencies for McStas/McXtrace:
 ```bash 
@@ -19,18 +22,19 @@ micromamba install git compilers cmake make flex bison
 micromamba install bash pyaml numpy mcpl ncrystal xraylib cif2hkl gsl libnexus openmpi=4 ucx
 ```
 
-## Install runtime-dependencies for McStas/McXtrace (visualisation+gui+bells+whistles)
+## Install runtime-dependencies for McStas/McXtrace 
+### (visualisation+gui+bells+whistles - requires downgrade to python 3.12...)
 ```bash 
 micromamba install python=3.12 pyqt\>=5.10 qscintilla2 matplotlib-base tornado\>=5 scipy pillow pyqtgraph qtpy nodejs ply rsync jinja2 mcstasscript jupytext jupyterlab nexpy
 ```
 
-# B) Build McStas / McXtrace
+# Build McStas / McXtrace
 ## (shallow) Clone the McCode repo hackathon branch:
 ```bash 
 git clone --depth 1 https://github.com/mccode-dev/McCode.git -b Helmholtz-hackathon-2025
 ```
 
-## Build McStas:
+### a) Build McStas:
 ```bash https://github.com/mccode-dev/Helmholtz2025/tree/main/install
 cd McCode
 mkdir build && cd build
@@ -57,7 +61,7 @@ cmake --build . --config Release
 cmake --build . --target install --config Release
 ```
 
-## Build McXtrace:
+### b) Build McXtrace:
 ```bash 
 cd McCode
 mkdir build && cd build
@@ -84,48 +88,27 @@ cmake --build . --config Release
 cmake --build . --target install --config Release
 ```
 
-# Running on a GPU machine with --openacc, 
-## OS requirement: Linux (x86_64 or arm64)
 
-## Activate nvhpc
-Likely just a matter of
+
+
+
+## NVIDIA tools
+### NVHPC
+On JEDI matter of
 ```bash 
 module load NVHPC
 ```
-or similar. (If for your own machine, download from https://developer.nvidia.com/hpc-sdk-downloads) 
-Profiling tools are availble via
+### Profiling tools are availble via
 ```bash 
 module load Nsight-Compute
 module load Nsight-Systems
 ```
-
-## Configure for "Multicore" OpenACC:
-```bash
-mcrun --write-user-config
-```
-and hack your `.mcstas/3.99.999/mccode_config.json` replacing `-acc=gpu -gpu=mem:managed` by `-acc=multicore`
-
-## Compile and run a McStas instrument on GPU (use `mxrun` and `$MCXTRACE for McXtrace`)
-```bash
-export MCSTAS=$CONDA_PREFIX/share/mcstas/resources
-cp $MCSTAS/examples/Templates/mini/mini.instr .
-mcrun -c mini.instr --openacc dummy=0 -n1e7
-```
-* Leaving out `--openacc` means targeting CPU
-* `-n` specifies problem size
-* Use `--verbose` to get increased cogen / compilation output
-* `--mpi=N` parallelizes by mpi
-
-
-## Run a GPU test for a named McStas instrument (use `mxtest` for McXtrace)
-```bash 
-mctest --testdir $PWD --openacc -n1e7 --instr=PSI_DMC
-```
-* Leaving out the `--instr` filter runs the "full suite"
-* Leaving out `--openacc` means targeting CPU
-* `--mpi=N` parallelizes by mpi
-* `mcviewtest` can be used to render a HTML result table [example](https://new-nightly.mcstas.org/2025-03-14_output.html) 
-
 ## Using "Nsight Systens and Compute" 
 * Get [Nsight Systems](https://developer.nvidia.com/nsight-systems) for your local laptop
 * Get [Nsight Compute](https://developer.nvidia.com/nsight-compute) for your laptop
+
+### [Running simulations / tests](TESTS.md)
+
+
+
+
