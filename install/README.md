@@ -23,7 +23,7 @@ micromamba install bash pyaml numpy mcpl ncrystal xraylib cif2hkl gsl libnexus o
 ```
 
 ### Install runtime-dependencies for McStas/McXtrace 
-### (visualisation+gui+bells+whistles - requires downgrade to python 3.12...)
+#### _(visualisation+gui+bells+whistles - requires downgrade to python 3.12...)_
 ```bash 
 micromamba install python=3.12 pyqt\>=5.10 qscintilla2 matplotlib-base tornado\>=5 scipy pillow pyqtgraph qtpy nodejs ply rsync jinja2 mcstasscript jupytext jupyterlab nexpy
 ```
