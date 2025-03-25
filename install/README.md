@@ -1,17 +1,12 @@
 # A) Set up dev environment based on micromamba and conda-forge
 
-## Install a fresh micromamba environment:
-### Unixes:
+## Install a fresh micromamba environment on Jedi
+### 
+Recommendation: install to `${PROJECT_training2508}/McStasMcXtrace/${USER}` - echo and keep on pasteboard
 ```bash 
 "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
 ```
-Recommendation: install to `${PROJECT_training2508}/McStasMcXtrace/${USER}`
-
-### Windows:
-```PowerShell 
-Invoke-Expression ((Invoke-WebRequest -Uri https://micro.mamba.pm/install.ps1 -UseBasicParsing).Content)
-```
-(Please do configure for conda-forge and start the environment - set up init as you wish, but do activate the base / created environment)
+Recommendation: activate the resulting enviroment `base` and simply install there:
 
 ## Install build-dependencies for McStas/McXtrace:
 ```bash 
