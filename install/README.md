@@ -3,7 +3,7 @@
 ## Install a fresh micromamba environment:
 ### Unixes:
 ```bash 
-"${SHELL}" <(curl -L micro.mamba.pm/install.sh)
+"${SHELL}" -p"${PROJECT}/McStasMcXtrace/${USER}" -r"${PROJECT}/McStasMcXtrace/${USER}" <(curl -L micro.mamba.pm/install.sh)
 ```
 Recommendation: install everything `~/micromamba/bin`
 
