@@ -334,7 +334,13 @@ INFO: Placing generated c-code copy mini.c in dataset mini_20250326_165302
 ```bash 
 mctest --testdir $PWD --openacc -n1e7 --instr=PSI_DMC
 ```
-(Will find all instruments in `${MCSTAS}/examples` matching the `--instr` (regex) and execute all `%Example` lines present in those files)
+Will find all instruments in `${MCSTAS}/examples` matching the `--instr` (regex) and execute all `%Example` lines present in the headers of those files, e.g.: 
+```
+find $MCSTAS -name \*PSI_DMC\*instr -exec grep -H %Example \{\} \;
+${MCSTAS}/examples/PSI/PSI_DMC/PSI_DMC.instr:* %Example: lambda=2.5666 Detector: Detector_I=7.5965E+02
+${MCSTAS}/examples/PSI/PSI_DMC_simple/PSI_DMC_simple.instr:* %Example: lambda=2.5666 Detector: Detector_I=7.5965E+02
+```
+The `Detector: name_I=value` must be matched within 10% for an "approved/green test".
 
 ## Visualise test numerical output by `mcviewtest` (writes an html table based on the json output)
 ```bash 
