@@ -96,6 +96,10 @@ On JEDI a matter of
 ```bash 
 module load NVHPC
 ```
+For multiple GPU's via MPI also add
+```
+module load OpenMPI/5.0.5
+```
 ### Profiling tools are available via
 ```bash 
 module load Nsight-Compute
