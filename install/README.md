@@ -100,6 +100,8 @@ For multiple GPU's via MPI also add
 ```
 module load OpenMPI/5.0.5
 ```
+(You may need to allow `mpirun --oversubscribe` via `mcrun --write-user-config` and editing the resulting file) 
+
 ### Profiling tools are available via
 ```bash 
 module load Nsight-Compute
