@@ -46,6 +46,7 @@ INFO: Placing instr file copy mini.instr in dataset mini_20250326_153956
 INFO: Placing generated c-code copy mini.c in dataset mini_20250326_153956
 ```
 In this output, step 1. from above is seen here:
+```
 DEBUG: CMD: /where/youinstalled/mcstas/bin/mcstas -t -o ./mini.c mini.instr
 
 -----------------------------------------------------------
