@@ -106,6 +106,6 @@ module load Nsight-Systems
 
 # [Running simulations](running.md)
 # [Suggested test-problems](TESTS.md)
-
+# [Rough makeshift shell-scripts for investigating scalability](scripts)
 
 
