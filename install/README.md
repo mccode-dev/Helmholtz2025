@@ -104,8 +104,8 @@ module load Nsight-Systems
 * Get [Nsight Systems](https://developer.nvidia.com/nsight-systems) for your local laptop
 * Get [Nsight Compute](https://developer.nvidia.com/nsight-compute) for your laptop
 
-# [Running simulations / tests](TESTS.md)
-
+# [Running simulations](running.md)
+# [Suggested test-problems](TESTS.md)
 
 
 
