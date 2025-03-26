@@ -19,8 +19,9 @@ micromamba install git compilers cmake make flex bison
 
 ### Install runtime-dependencies for McStas/McXtrace (mcrun + basic calculations only)
 ```bash 
-micromamba install bash pyaml numpy mcpl ncrystal xraylib cif2hkl gsl libnexus openmpi=4 ucx
+micromamba install bash pyaml numpy mcpl ncrystal xraylib cif2hkl gsl libnexus
 ```
+(On your own machine you may want `openmpi=4 ucx` too)
 
 ### Install runtime-dependencies for McStas/McXtrace 
 #### _(visualisation+gui+bells+whistles - requires downgrade to python 3.12...)_
