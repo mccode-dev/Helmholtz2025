@@ -334,9 +334,11 @@ INFO: Placing generated c-code copy mini.c in dataset mini_20250326_165302
 ```bash 
 mctest --testdir $PWD --openacc -n1e7 --instr=PSI_DMC
 ```
+(Will find all instruments in `${MCSTAS}/examples` matching the `--instr` (regex) and execute all `%Example` lines present in those files)
+
 ## Visualise test numerical output by `mcviewtest` (writes an html table based on the json output)
 ```bash 
-mcviewtest --testdir $PWD --openacc -n1e7 --instr=PSI_DMC
+mcviewtest $PWD
 ```
 HTML result table of this type [example](https://new-nightly.mcstas.org/2025-03-26_output.html) 
 
