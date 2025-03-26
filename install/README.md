@@ -101,7 +101,7 @@ For multiple GPU's via MPI also add
 module load OpenMPI/5.0.5
 ```
 Fur multiple GPU's you may need to:
-* `export CUDA_VISIBLE_DEVICES=0,1,2,3
+* `export CUDA_VISIBLE_DEVICES=0,1,2,3`
 * configure `mpirun --oversubscribe` via `mcrun --write-user-config` and editing the resulting file
 ```
 +-----------------------------------------------------------------------------------------+
