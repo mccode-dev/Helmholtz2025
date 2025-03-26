@@ -72,152 +72,273 @@ DEBUG: CMD: ./mini.out --trace=0 --ncount=10000000.0 --dir=mini_20250326_153956 
 Detector: detector_I=345.985 detector_ERR=0.219791 detector_N=2.47797e+06 "PSD.dat"
 ```
 
-The run-tools have the following main switches:
-```
-mcrun --help
-Usage: mcrun.py [-cpnN] Instr [-sndftgahi] params={val|min,max|min,guess,max}...
+See [this page](mcrun.md) for mcrun/mxrun switches.
 
-Options:
-  --version             show program's version number and exit
-  -h, --help            show this help message and exit
-
-  mcrun options:
-    -c, --force-compile
-                        force rebuilding of instrument
-    --cogen=cogen       Choice of code-generator (implies -c)
-    -I I                Append to McCode search path (implies -c)
-    --D1=D1             Set extra -D args (implies -c)
-    --D2=D2             Set extra -D args (implies -c)
-    --D3=D3             Set extra -D args (implies -c)
-    -p FILE, --param=FILE
-                        Read parameters from file FILE
-    -N NP, --numpoints=NP
-                        Set number of scan points
-    -L, --list          Use a fixed list of points for linear scanning
-    -M, --multi         Run a multi-dimensional scan
-    --autoplot          Open plotter on generated dataset
-    --invcanvas         Forward request for inverted canvas to plotter
-    --autoplotter=AUTOPLOTTER
-                        Specify the plotter used with --autoplot
-    --embed             Store copy of instrument file in output directory
-    --mpi=NB_CPU        Spread simulation over NB_CPU machines using MPI
-    --openacc           parallelize using openacc
-    --funnel            funneling simulation flow, e.g. for mixed CPU/GPU
-    --machines=machines
-                        Defines path of MPI machinefile to use in parallel
-                        mode
-    --optimise-file=FILE
-                        Store scan results in FILE (defaults to: "mccode.dat")
-    --no-cflags         Disable optimising compiler flags for faster
-                        compilation
-    --no-main           Do not generate a main(), e.g. for use with
-                        mcstas2vitess.pl. Implies -c
-    --verbose           Enable verbose output
-    --write-user-config
-                        Generate a user config file
-    --edit-user-config  Generate and edit user config file in EDITOR
-    --override-config=PATH
-                        Load config file from specific dir
-    --optimize          Optimize instrument variable parameters to maximize
-                        monitors
-    --optimize-maxiter=optimize_maxiter
-                        Maximum number of optimization iterations to perform.
-                        Default=1000
-    --optimize-tol=optimize_tol
-                        Tolerance for optimization termination. When optimize-
-                        tol is specified, the selected optimization algorithm
-                        sets some relevant solver-specific tolerance(s) equal
-                        to optimize-tol
-    --optimize-method=optimize_method
-                        Optimization solver in ['powell', 'nelder-mead', 'cg',
-                        'bfgs', 'newton-cg', 'l-bfgs-b', 'tnc', 'cobyla',
-                        'slsqp', 'trust-constr', 'dogleg', 'trust-ncg',
-                        'trust-exact', 'trust-krylov'] (default: powell) You
-                        can use your custom method method(fun, x0, args,
-                        **kwargs, **options). Please refer to scipy
-                        documentation for proper use of it: https://docs.scipy
-                        .org/doc/scipy/reference/generated/scipy.optimize.mini
-                        mize.html?highlight=minimize
-    --optimize-eval=optimize_eval
-                        Optimization expression to evaluate for each detector
-                        "d" structure. You may combine: "d.intensity" The
-                        detector intensity; "d.error"     The detector
-                        intensity uncertainty; "d.values"    An array with
-                        [intensity, error, counts]; "d.X0 d.Y0"   Center of
-                        signal (1st moment); "d.dX d.dY"   Width  of signal
-                        (2nd moment). Default is "d.intensity". Examples are:
-                        "d.intensity/d.dX" and "d.intensity/d.dX/d.dY"
-    --optimize-minimize
-                        Choose to minimize the monitors instead of maximize
-    --optimize-monitor=optimize_monitor
-                        Name of a single monitor to optimize (default is to
-                        use all)
-    --showcfg=ITEM      Print selected cfg item and exit (paths are resolved
-                        and absolute). Allowed values are "bindir", "libdir",
-                        "resourcedir", and "tooldir".
-
-  Instrument options:
-    -s SEED, --seed=SEED
-                        Set random seed (must be: SEED != 0)
-    -n COUNT, --ncount=COUNT
-                        Set number of neutron to simulate
-    -t trace, --trace=trace
-                        Enable trace of neutron through instrument
-    -g, --gravitation, --gravity
-                        Enable gravitation for all trajectories
-    -d DIR, --dir=DIR   Put all data files in directory DIR
-    --format=FORMAT     Output data files using format FORMAT, usually McCode
-                        or NeXus (format list obtained from <instr>.out -h)
-    --IDF               Flag to attempt inclusion of XML-based IDF when
-                        --format=NeXus (format list obtained from <instr>.out
-                        -h)
-    --bufsiz=BUFSIZ     Monitor_nD list/buffer-size (defaults to 10000000)
-    --vecsize=VECSIZE   vector length in OpenACC parallel scenarios
-    --numgangs=NUMGANGS
-                        number of 'gangs' in OpenACC parallel scenarios
-    --gpu_innerloop=INNERLOOP
-                        Maximum particles in an OpenACC kernel run. (If
-                        INNERLOOP is smaller than ncount we repeat)
-    --no-output-files   Do not write any data files
-    -i, --info          Detailed instrument information
-    --list-parameters   Print the instrument parameters to standard out
-    --meta-list         Print all metadata defining component names
-    --meta-defined=META_DEFINED
-                        Print metadata names for component, or indicate if
-                        component:name exists
-    --meta-type=META_TYPE
-                        Print metadata type for component:name
-    --meta-data=META_DATA
-                        Print metadata for component:name
-```
-
-_______________________________-
-
-
-# Running on a GPU machine with --openacc, 
-## OS requirement: Linux (x86_64 or arm64)
-## Compile and run a McStas instrument on GPU (use `mxrun` and `$MCXTRACE for McXtrace`)
+# Running on a GPU: add  `--openacc` for compilation with `nvc`
+## OS requirement is Linux (x86_64 or arm64)
+### Compile and run an instrument:
 ```bash
-export MCSTAS=$CONDA_PREFIX/share/mcstas/resources
-cp $MCSTAS/examples/Templates/mini/mini.instr .
 mcrun -c mini.instr --openacc dummy=0 -n1e7
+INFO: No output directory specified (--dir)
+INFO: Using directory: "mini_20250326_165302"
+INFO: Regenerating c-file: mini.c
+
+-----------------------------------------------------------
+
+Generating single GPU kernel or single CPU section layout: 
+
+-----------------------------------------------------------
+
+Generating GPU/CPU -DFUNNEL layout:
+
+-----------------------------------------------------------
+CFLAGS=
+INFO: Recompiling: ./mini.out
+"./mini.c", line 4558: warning: variable "num" was declared but never referenced [declared_but_not_referenced]
+          int num = 3;
+              ^
+
+Remark: individual warnings can be suppressed with "--diag_suppress <warning-name>"
+
+"./mini.c", line 7091: warning: variable "tc2" was set but never used [set_but_not_used]
+      Coords tc1, tc2;
+                  ^
+
+"./mini.c", line 7088: warning: variable "current_setpos_index" was declared but never referenced [declared_but_not_referenced]
+    int current_setpos_index = 1;
+        ^
+
+"./mini.c", line 7132: warning: variable "current_setpos_index" was declared but never referenced [declared_but_not_referenced]
+    int current_setpos_index = 2;
+        ^
+
+"./mini.c", line 7208: warning: variable "current_setpos_index" was declared but never referenced [declared_but_not_referenced]
+    int current_setpos_index = 3;
+        ^
+
+"./mini.c", line 7273: warning: variable "current_setpos_index" was declared but never referenced [declared_but_not_referenced]
+    int current_setpos_index = 4;
+        ^
+
+"./mini.c", line 8716: warning: variable "t" was declared but never referenced [declared_but_not_referenced]
+    time_t  t;
+            ^
+
+"./mini.c", line 8717: warning: variable "ct" was set but never used [set_but_not_used]
+    clock_t ct;
+            ^
+
+"./mini.c", line 1496: warning: variable "mcstartdate" was set but never used [set_but_not_used]
+  static   long mcstartdate            = 0; /* start simulation time */
+                ^
+
+"./mini.c", line 2915: warning: function "strcpy_valid" was declared but never referenced [declared_but_not_referenced]
+  static char *strcpy_valid(char *valid, char *original)
+               ^
+
+mcgenstate:
+     88, Generating acc routine seq
+         Generating NVIDIA GPU code
+particle_getvar:
+    102, Generating acc routine seq
+         Generating NVIDIA GPU code
+particle_getvar_void:
+    134, Generating acc routine seq
+         Generating NVIDIA GPU code
+particle_setvar_void:
+    158, Generating acc routine seq
+         Generating NVIDIA GPU code
+particle_setvar_void_array:
+    180, Generating acc routine seq
+         Generating NVIDIA GPU code
+particle_restore:
+    191, Generating acc routine seq
+         Generating NVIDIA GPU code
+particle_getuservar_byid:
+    200, Generating acc routine seq
+         Generating NVIDIA GPU code
+particle_uservar_init:
+    210, Generating acc routine seq
+         Generating NVIDIA GPU code
+noprintf:
+   1543, Generating acc routine seq
+         Generating NVIDIA GPU code
+str_comp:
+   1547, Generating acc routine seq
+         Generating NVIDIA GPU code
+str_len:
+   1556, Generating acc routine seq
+         Generating NVIDIA GPU code
+mcget_ncount:
+   4179, Generating acc routine seq
+         Generating NVIDIA GPU code
+coords_set:
+   4610, Generating acc routine seq
+         Generating NVIDIA GPU code
+coords_get:
+   4621, Generating acc routine seq
+         Generating NVIDIA GPU code
+coords_add:
+   4630, Generating acc routine seq
+         Generating NVIDIA GPU code
+coords_sub:
+   4642, Generating acc routine seq
+         Generating NVIDIA GPU code
+coords_neg:
+   4654, Generating acc routine seq
+         Generating NVIDIA GPU code
+coords_scale:
+   4664, Generating acc routine seq
+         Generating NVIDIA GPU code
+coords_sp:
+   4674, Generating acc routine seq
+         Generating NVIDIA GPU code
+coords_xp:
+   4682, Generating acc routine seq
+         Generating NVIDIA GPU code
+coords_len:
+   4692, Generating acc routine seq
+         Generating NVIDIA GPU code
+coords_print:
+   4714, Generating acc routine seq
+         Generating NVIDIA GPU code
+coords_norm:
+   4721, Generating acc routine seq
+         Generating NVIDIA GPU code
+rot_set_rotation:
+   4767, Generating acc routine seq
+         Generating NVIDIA GPU code
+rot_test_identity:
+   4802, Generating acc routine seq
+         Generating NVIDIA GPU code
+rot_mul:
+   4813, Generating acc routine seq
+         Generating NVIDIA GPU code
+rot_copy:
+   4830, Generating acc routine seq
+         Generating NVIDIA GPU code
+rot_transpose:
+   4841, Generating acc routine seq
+         Generating NVIDIA GPU code
+rot_apply:
+   4857, Generating acc routine seq
+         Generating NVIDIA GPU code
+vec_prod_func:
+   4886, Generating acc routine seq
+         Generating NVIDIA GPU code
+scalar_prod:
+   4897, Generating acc routine seq
+         Generating NVIDIA GPU code
+norm_func:
+   4901, Generating acc routine seq
+         Generating NVIDIA GPU code
+mccoordschange:
+   5078, Generating acc routine seq
+         Generating NVIDIA GPU code
+mccoordschange_polarisation:
+   5109, Generating acc routine seq
+         Generating NVIDIA GPU code
+normal_vec:
+   5126, Generating acc routine seq
+         Generating NVIDIA GPU code
+solve_2nd_order:
+   5225, Generating acc routine seq
+         Generating NVIDIA GPU code
+_randvec_target_circle:
+   5309, Generating acc routine seq
+         Generating NVIDIA GPU code
+_randvec_target_rect_angular:
+   5375, Generating acc routine seq
+         Generating NVIDIA GPU code
+_randvec_target_rect_real:
+   5452, Generating acc routine seq
+         Generating NVIDIA GPU code
+kiss_srandom:
+   5724, Generating acc routine seq
+         Generating NVIDIA GPU code
+kiss_random:
+   5736, Generating acc routine seq
+         Generating NVIDIA GPU code
+_hash:
+   5762, Generating acc routine seq
+         Generating NVIDIA GPU code
+_randnorm2:
+   5803, Generating acc routine seq
+         Generating NVIDIA GPU code
+_randtriangle:
+   5814, Generating acc routine seq
+         Generating NVIDIA GPU code
+_rand01:
+   5819, Generating acc routine seq
+         Generating NVIDIA GPU code
+_randpm1:
+   5827, Generating acc routine seq
+         Generating NVIDIA GPU code
+_rand0max:
+   5835, Generating acc routine seq
+         Generating NVIDIA GPU code
+_randminmax:
+   5842, Generating acc routine seq
+         Generating NVIDIA GPU code
+mcsetstate:
+   6501, Generating acc routine seq
+         Generating NVIDIA GPU code
+mcgetstate:
+   6538, Generating acc routine seq
+         Generating NVIDIA GPU code
+inside_rectangle:
+   6598, Generating acc routine seq
+         Generating NVIDIA GPU code
+box_intersect:
+   6615, Generating acc routine seq
+         Generating NVIDIA GPU code
+cylinder_intersect:
+   6730, Generating acc routine seq
+         Generating NVIDIA GPU code
+sphere_intersect:
+   6785, Generating acc routine seq
+         Generating NVIDIA GPU code
+init:
+   7578, Generating update device(_source_var,_instrument_var,_arm_var,_coll2_var,_detector_var)
+class_Source_simple_trace:
+   7621, Generating acc routine seq
+         Generating NVIDIA GPU code
+class_Slit_trace:
+   7724, Generating acc routine seq
+         Generating NVIDIA GPU code
+class_PSD_monitor_trace:
+   7768, Generating acc routine seq
+         Generating NVIDIA GPU code
+raytrace:
+   7843, Generating acc routine seq
+         Generating NVIDIA GPU code
+raytrace_all:
+   7966, Generating implicit firstprivate(gpu_innerloop)
+         Generating NVIDIA GPU code
+       7980, #pragma acc loop gang(numgangs), vector(vecsize) /* blockIdx.x threadIdx.x */
+   7966, Local memory used for .inl_particle_7979,particleN,.inl_.inl_mcneutron_0_7994,.inl_.X1781_7996,.inl_.inl_.X1969_15_7995
+   7980, Generating implicit firstprivate(seed,_particle)
+finally:
+   8287, Generating update self(_source_var,_instrument_var,_arm_var,_coll2_var,_detector_var)
+mcenabletrace:
+   5961, Generating update device(mcdotrace)
+INFO: ===
+*** TRACE end *** 
+Detector: detector_I=345.86 detector_ERR=0.219751 detector_N=2.47708e+06 "PSD.dat"
+INFO: Placing instr file copy mini.instr in dataset mini_20250326_165302
+INFO: Placing generated c-code copy mini.c in dataset mini_20250326_165302
+
 ```
-* Leaving out `--openacc` means targeting CPU
-* `-n` specifies problem size
-* Use `--verbose` to get increased cogen / compilation output
-* `--mpi=N` parallelizes by mpi
 
-
-## Run a GPU test for a named McStas instrument (use `mxtest` for McXtrace)
+## Run a GPU test for a named McStas instrument (use `mxtest` for McXtrace) - test data in json files
 ```bash 
 mctest --testdir $PWD --openacc -n1e7 --instr=PSI_DMC
 ```
-* Leaving out the `--instr` filter runs the "full suite"
-* Leaving out `--openacc` means targeting CPU
-* `--mpi=N` parallelizes by mpi
-* `mcviewtest` can be used to render a HTML result table [example](https://new-nightly.mcstas.org/2025-03-14_output.html) 
-
-
+## Visualise test numerical output by `mcviewtest` (writes an html table based on the json output)
+```bash 
+mcviewtest --testdir $PWD --openacc -n1e7 --instr=PSI_DMC
+```
+HTML result table of this type [example](https://new-nightly.mcstas.org/2025-03-26_output.html) 
 
 ## Configure for "Multicore" OpenACC:
 ```bash
