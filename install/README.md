@@ -100,7 +100,45 @@ For multiple GPU's via MPI also add
 ```
 module load OpenMPI/5.0.5
 ```
-(You may need to allow `mpirun --oversubscribe` via `mcrun --write-user-config` and editing the resulting file) 
+Fur multiple GPU's you may need to:
+* `export CUDA_VISIBLE_DEVICES=0,1,2,3
+* configure `mpirun --oversubscribe` via `mcrun --write-user-config` and editing the resulting file
+```
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.86.15              Driver Version: 570.86.15	   CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GH200 120GB             On  |   00000009:01:00.0 Off |                    0 |
+| N/A   63C    P0            357W /  680W |     639MiB /  97871MiB |    100%	  Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA GH200 120GB             On  |   00000019:01:00.0 Off |                    0 |
+| N/A   62C    P0            345W /  680W |     639MiB /  97871MiB |    100%	  Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA GH200 120GB             On  |   00000029:01:00.0 Off |                    0 |
+| N/A   63C    P0            346W /  680W |     637MiB /  97871MiB |    100%	  Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA GH200 120GB             On  |   00000039:01:00.0 Off |                    0 |
+| N/A   62C    P0            321W /  680W |     638MiB /  97871MiB |    100%	  Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage	  |
+|=========================================================================================|
+|    0   N/A  N/A          397006      C   ./mini.out                              622MiB |
+|    1   N/A  N/A          397005      C   ./mini.out                              622MiB |
+|    2   N/A  N/A          397003      C   ./mini.out                              622MiB |
+|    3   N/A  N/A          397004      C   ./mini.out                              622MiB |
++-----------------------------------------------------------------------------------------+
+``` 
 
 ### Profiling tools are available via
 ```bash 
