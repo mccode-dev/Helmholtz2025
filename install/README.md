@@ -105,6 +105,7 @@ module load Nsight-Systems
 * Get [Nsight Compute](https://developer.nvidia.com/nsight-compute) for your laptop
 
 # [Running simulations](running.md)
+# [Plotting output](mcplot.md)
 # [Suggested test-problems](TESTS.md)
 # [Rough makeshift shell-scripts for investigating scalability](scripts)
 
