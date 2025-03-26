@@ -6,7 +6,7 @@
 The basic "high-level" CLI interface to McStas is `mcrun` / for McXtrace `mxrun`. It automates conversion from McCode `DSL` grammar in instrument files to a functional binary for performing a given simulation. This includes:
 1. Calling the `mcstas` / `mcxtrace` code generator that translates the McCode `DSL` to `c`-code
 2. Taking various parallelsation-options and other setting into account during compilation
-3. Calling the relevant compiler with the relevant settings
+3. Calling the relevant compiler with the relevant settings, thereby generating an `.out` binary
 
 During the compile-process, file time-stamps are investigated so that:
 * A new `.c` code is generated if the `.instr` is newer than an existing `.c`
