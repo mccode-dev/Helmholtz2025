@@ -66,6 +66,7 @@ Step 2 is seen here:
 DEBUG: CMD: /where/youinstalled/mcstas/bin/aarch64-conda-linux-gnu-cc -o ./mini.out ./mini.c -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--allow-shlib-undefined -Wl,-rpath,/where/youinstalled/mcstas/lib -Wl,-rpath-link,/where/youinstalled/mcstas/lib -L/where/youinstalled/mcstas/lib -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O3 -pipe -isystem /where/youinstalled/mcstas/include -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O3 -pipe -isystem /where/youinstalled/mcstas/include -O2 -g -DNDEBUG -I/p/project1/training2508/McStasMcXtrace/willendrup1/include -Wl,-rpath,/where/youinstalled/mcstas/lib -L/where/youinstalled/mcstas/lib -fno-PIC -fPIE -flto -O3 -mtune=native -march=native -fno-math-errno -ftree-vectorize -g -DNDEBUG -D_POSIX_SOURCE -std=c99 -lm
 ```
 Step 3 is seen here:
+```
 DEBUG: CMD: ./mini.out --trace=0 --ncount=10000000.0 --dir=mini_20250326_153956 --format=McCode --bufsiz=10000000 dummy=0
 *** TRACE end *** 
 Detector: detector_I=345.985 detector_ERR=0.219791 detector_N=2.47797e+06 "PSD.dat"
