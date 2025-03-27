@@ -72,7 +72,7 @@ Usage: $0 [options] [mxrun params]
     print $OUT "# the --exclusive is needed when running OpenMPI\n";
     print $OUT "# it will all cores on the allocated nodes\n";
     print $OUT "#SBATCH --exclusive \n";
-    print $OUT "micromamba activate\n";
+    print $OUT "/p/project1/training2508/McStasMcXtrace/${USER}/bin/micromamba activate\n";
     print $OUT "export MCXTRACE=\$\{CONDA_PREFIX\}/share/mcxtrace/resources\n";
     print $OUT "module load ${MPImodule}\n";
     print $OUT "\n\n";
