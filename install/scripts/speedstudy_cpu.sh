@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # First, check if $1 is a valid instrument file
-NUMMPI=12
+NUMMPI=72
 INSTR=$1
 PARMS=${*:2}
 IDIR=`dirname $INSTR`
