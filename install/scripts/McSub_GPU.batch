@@ -12,7 +12,7 @@
 # the --exclusive is needed when running OpenMPI
 # it will all cores on the allocated nodes
 #SBATCH --exclusive 
-/p/project1/training2508/McStasMcXtrace/${USER}/bin/micromamba activate
+eval "$(/p/project1/training2508/McStasMcXtrace/${USER}/bin/micromamba shell.bash hook 2> /dev/null)"
 export MCSTAS=${CONDA_PREFIX}/share/mcstas/resources
 module load NVHPC/25.1-CUDA-12 OpenMPI/5.0.5
 
