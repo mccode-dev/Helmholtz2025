@@ -11,7 +11,6 @@ During the compile-process, file time-stamps are investigated so that:
 * add `--verbose` to get a glance at what is happening
 
 Once a binary exists this is executed and any "simulation parameters" forwarded to the binary. Example run for single-cpu run:
-(You may also use the `-y` input to assume "all simulation parameters default" i.e. `mcrun -c mini.instr --verbose -y -n1e7`)
 ```bash
 export MCSTAS=$CONDA_PREFIX/share/mcstas/resources
 cp $MCSTAS/examples/Templates/mini/mini.instr .
@@ -43,6 +42,7 @@ DEBUG: CMD: ./mini.out finished
 INFO: Placing instr file copy mini.instr in dataset mini_20250326_153956
 INFO: Placing generated c-code copy mini.c in dataset mini_20250326_153956
 ```
+(You may also use the new `-y` input to assume "all simulation parameters default" i.e. `mcrun -c mini.instr --verbose -y -n1e7`)
 In this output, step 1. from above is seen here:
 ```
 DEBUG: CMD: /where/youinstalled/mcstas/bin/mcstas -t -o ./mini.c mini.instr
