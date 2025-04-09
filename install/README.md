@@ -43,7 +43,7 @@ cmake \
     -DCMAKE_INSTALL_PREFIX="${CONDA_PREFIX}" \
     -S .. \
     -G "Unix Makefiles" \
-    -DMCCODE_BUILD_CONDA_PKG=ON \
+    -DMCCODE_BUILD_CONDA_PKG=OFF \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_BUILD_TYPE=Release \
     -DBUILD_MCSTAS=ON \
@@ -70,7 +70,7 @@ cmake \
     -DCMAKE_INSTALL_PREFIX="${CONDA_PREFIX}" \
     -S .. \
     -G "Unix Makefiles" \
-    -DMCCODE_BUILD_CONDA_PKG=ON \
+    -DMCCODE_BUILD_CONDA_PKG=OFF \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_BUILD_TYPE=Release \
     -DBUILD_MCXTRACE=ON \
